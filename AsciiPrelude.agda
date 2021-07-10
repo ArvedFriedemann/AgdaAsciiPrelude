@@ -1,4 +1,4 @@
-module AsciiPrelude where
+module AgdaAsciiPrelude.AsciiPrelude where
 
 open import Agda.Primitive using (Level; lzero; lsuc) renaming (_⊔_ to _~U~_; Setω to Setw) public
 
