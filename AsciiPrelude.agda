@@ -16,6 +16,8 @@ _-x-_ = _and_
 open import Data.Unit using () renaming (⊤ to T; tt to top) public
 open import Data.Sum using () renaming ([_,_] to case-or; _⊎_ to _or_; inj₁ to left; inj₂ to right) public
 open import Data.Empty using () renaming (⊥ to BOT; ⊥-elim to absurd) public
+¬ : forall {l} -> Set l -> Set l
+¬ P = P -> BOT
 
 open import Data.Product using () renaming (Σ to sigma; ∃ to exists) public
 
