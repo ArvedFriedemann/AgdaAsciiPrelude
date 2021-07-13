@@ -6,7 +6,7 @@ import Relation.Binary.PropositionalEquality as Eq
 open Eq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===_) public
 open Eq.≡-Reasoning using (begin_) renaming (_≡⟨⟩_ to _=<>_; step-≡ to step-=; _∎ to _qed) public
 
-open import Function using () renaming (_∘_ to _o_) public
+open import Function using (_$_) renaming (_∘_ to _o_) public
 
 open import Data.Product using (_,_) renaming (_×_ to _and_; proj₁ to fst; proj₂ to snd) public
 
