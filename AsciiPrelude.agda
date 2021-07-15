@@ -3,8 +3,12 @@ module AgdaAsciiPrelude.AsciiPrelude where
 open import Agda.Primitive using (Level; lzero; lsuc) renaming (_⊔_ to _~U~_; Setω to Setw) public
 
 import Relation.Binary.PropositionalEquality as Eq
-open Eq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===_) public
+open Eq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===_; _≢_ to _=/=) public
 open Eq.≡-Reasoning using (begin_) renaming (_≡⟨⟩_ to _=<>_; step-≡ to step-=; _∎ to _qed) public
+
+infixr 2 _=<_>_
+_=<_>_ : forall {l} {A : Set l} (x {y z} : A) -> x === y -> y === z -> x === z
+x =< x=y > y=z = step-= x y=z x=y
 
 open import Function using (_$_) renaming (_∘_ to _o_) public
 
@@ -16,8 +20,18 @@ _-x-_ = _and_
 open import Data.Unit using () renaming (⊤ to T; tt to top) public
 open import Data.Sum using () renaming ([_,_] to case-or; _⊎_ to _or_; inj₁ to left; inj₂ to right) public
 open import Data.Empty using () renaming (⊥ to BOT; ⊥-elim to absurd) public
-¬ : forall {l} -> Set l -> Set l
-¬ P = P -> BOT
+open import Relation.Nullary using (yes; no; _because_; Dec) renaming (ofʸ to of-y; ofⁿ to of-n; ¬_ to ¬_ ) public
+
+record DecEq {l} (A : Set l) : Set l where
+  infixr 4 _==_
+  field
+    _==_ : (a1 : A) -> (a2 : A) -> Dec (a1 === a2)
+open DecEq {{...}} public
+
+ifDec_then_else_ : forall {l l'} -> {A : Set l} -> {B : Set l'} -> Dec A -> B -> B -> B
+ifDec (yes _) then a else _ = a
+ifDec (no _) then _ else a = a
+
 
 open import Data.Product using () renaming (Σ to sigma; ∃ to exists) public
 
