@@ -21,7 +21,7 @@ open import Data.Unit using () renaming (⊤ to T; tt to top) public
 open import Data.Sum using () renaming ([_,_] to case-or; _⊎_ to _or_; inj₁ to left; inj₂ to right) public
 open import Data.Empty using () renaming (⊥ to BOT; ⊥-elim to absurd) public
 open import Relation.Nullary using (yes; no; _because_; Dec) renaming (ofʸ to of-y; ofⁿ to of-n; ¬_ to ¬_ ) public
-open import Relation.Nullary.Decidable using (True; False)
+open import Relation.Nullary.Decidable using (True; False; isYes; isNo)
 
 record DecEq {l} (A : Set l) : Set l where
   infixr 4 _==_
