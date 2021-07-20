@@ -45,6 +45,30 @@ syntax exists-syntax (\ x -> B) = exists x st B
 
 open import Data.List renaming (_∷_ to _::_; or to disjunct; and to conjunct) public
 open import Data.Bool using (Bool; true; false; not; _xor_; if_then_else_) renaming (_∧_ to _&&_; _∨_ to _||_; T to Tt) public
+
+double-not : {x y : Bool} -> x === (not $ not y) -> x === y
+double-not {x} {false} x=¬¬y = x=¬¬y
+double-not {x} {true} x=¬¬y = x=¬¬y
+
+double-not' : {x y : Bool} -> x === y -> x === (not $ not y)
+double-not' {x} {false} x=y = x=y
+double-not' {x} {true} x=y = x=y
+
+and-false : {x y : Bool} -> x && y === false -> (x === false) or (y === false)
+and-false {false} {y} x&&y=f = left refl
+and-false {true} {false} x&&y=f = right refl
+
+and-true : {x y : Bool} -> x && y === true -> (x === true) and (y === true)
+and-true {true} {true} x&&y=f = refl , refl
+
+or-true : {x y : Bool} -> x || y === true -> (x === true) or (y === true)
+or-true {true} {y} x&&y=f = left refl
+or-true {false} {true} x&&y=f = right refl
+
+or-false : {x y : Bool} -> x || y === false -> (x === false) and (y === false)
+or-false {false} {false} x&&y=f = refl , refl
+
+
 open import Data.Nat renaming (ℕ to Nat) public
 
 --
