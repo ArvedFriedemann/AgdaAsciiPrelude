@@ -23,16 +23,17 @@ open import Data.Empty using () renaming (⊥ to BOT; ⊥-elim to absurd) public
 open import Relation.Nullary using (yes; no; _because_; Dec) renaming (ofʸ to of-y; ofⁿ to of-n; ¬_ to ¬_ ) public
 open import Relation.Nullary.Decidable using (True; False; isYes; isNo) public
 
-record DecEq {l} (A : Set l) : Set l where
-  infixr 4 _==_
-  field
-    _==_ : (a1 : A) -> (a2 : A) -> Dec (a1 === a2)
-open DecEq {{...}} public
-
 ifDec_then_else_ : forall {l l'} -> {A : Set l} -> {B : Set l'} -> Dec A -> B -> B -> B
 ifDec (yes _) then a else _ = a
 ifDec (no _) then _ else a = a
 
+open import Relation.Binary.Core public
+open import Relation.Binary.Definitions public
+open import Relation.Binary using (IsDecEquivalence) public
+open IsDecEquivalence {{...}} using () renaming (_≟_ to _==_) public
+
+DecEq : forall {l} (A : Set l) -> Set _
+DecEq A = IsDecEquivalence {A = A} _===_
 
 open import Data.Product using () renaming (Σ to sigma; ∃ to exists) public
 
@@ -71,5 +72,5 @@ or-false {false} {false} x&&y=f = refl , refl
 
 
 open import Data.Nat renaming (ℕ to Nat) public
-
+open import Data.Nat.Instances public
 --
