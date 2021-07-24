@@ -27,8 +27,6 @@ ifDec_then_else_ : forall {l l'} -> {A : Set l} -> {B : Set l'} -> Dec A -> B ->
 ifDec (yes _) then a else _ = a
 ifDec (no _) then _ else a = a
 
-open import Relation.Binary.Core public
-open import Relation.Binary.Definitions public
 open import Relation.Binary using (IsDecEquivalence) public
 open IsDecEquivalence {{...}} using () renaming (_≟_ to _==_) public
 
