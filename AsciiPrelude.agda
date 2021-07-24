@@ -10,7 +10,7 @@ infixr 2 _=<_>_
 _=<_>_ : forall {l} {A : Set l} (x {y z} : A) -> x === y -> y === z -> x === z
 x =< x=y > y=z = step-= x y=z x=y
 
-open import Function using (_$_) renaming (_∘_ to _o_) public
+open import Function using (_$_; id; const) renaming (_∘_ to _o_) public
 
 open import Data.Product using (_,_) renaming (_×_ to _and_; proj₁ to fst; proj₂ to snd) public
 
