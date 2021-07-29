@@ -68,9 +68,9 @@ or-true {false} {true} x&&y=f = right refl
 or-false : {x y : Bool} -> x || y === false -> (x === false) and (y === false)
 or-false {false} {false} x&&y=f = refl , refl
 
-not-involutive : forall x -> x === not (not x)
-not-involutive false = refl
-not-involutive true = refl
+not-involutive : forall {x} -> x === not (not x)
+not-involutive {x = false} = refl
+not-involutive {x = true} = refl
 
 open import Data.Nat renaming (ℕ to Nat) public
 open import Data.Nat.Instances public
