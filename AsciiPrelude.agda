@@ -17,7 +17,9 @@ open import Data.Product using (_,_) renaming (_×_ to _and_; proj₁ to fst; pr
 _-x-_ : forall {a b} -> Set a -> Set b -> Set (a ~U~ b)
 _-x-_ = _and_
 
-open import Data.Unit using () renaming (⊤ to T; tt to top) public
+open import Data.Unit using () renaming (⊤ to T0; tt to top0) public
+record T {l : Level} : Set l where
+  constructor top
 open import Data.Sum using () renaming ([_,_] to case-or; map to map-or; _⊎_ to _or_; inj₁ to left; inj₂ to right) public
 open import Data.Empty using () renaming (⊥ to BOT; ⊥-elim to absurd) public
 open import Relation.Nullary using (yes; no; _because_; Dec) renaming (ofʸ to of-y; ofⁿ to of-n; ¬_ to ¬_ ) public
