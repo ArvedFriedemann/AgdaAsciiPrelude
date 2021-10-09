@@ -10,16 +10,14 @@ infixr 2 _=<_>_
 _=<_>_ : forall {l} {A : Set l} (x {y z} : A) -> x === y -> y === z -> x === z
 x =< x=y > y=z = step-= x y=z x=y
 
-open import Function using (_$_; id; const) renaming (_∘_ to _o_) public
+open import Function using (_$_; id; const; flip) renaming (_∘_ to _o_) public
 
 open import Data.Product using (_,_) renaming (_×_ to _and_; proj₁ to fst; proj₂ to snd) public
 
 _-x-_ : forall {a b} -> Set a -> Set b -> Set (a ~U~ b)
 _-x-_ = _and_
 
-open import Data.Unit using () renaming (⊤ to T0; tt to top0) public
-record T {l : Level} : Set l where
-  constructor top
+open import Data.Unit.Polymorphic using () renaming (⊤ to T; tt to top) public
 open import Data.Sum using () renaming ([_,_] to case-or; map to map-or; _⊎_ to _or_; inj₁ to left; inj₂ to right) public
 open import Data.Empty using () renaming (⊥ to BOT; ⊥-elim to absurd) public
 open import Relation.Nullary using (yes; no; _because_; Dec) renaming (ofʸ to of-y; ofⁿ to of-n; ¬_ to ¬_ ) public
