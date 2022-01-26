@@ -33,9 +33,9 @@ open IsDecEquivalence {{...}} using () renaming (_≟_ to _==_) public
 DecEq : forall {l} (A : Set l) -> Set _
 DecEq A = IsDecEquivalence {A = A} _===_
 
-open import Data.Product using () renaming (Σ to sigma; ∃ to exists) public
+open import Data.Product using () renaming (Σ to Sigma; ∃ to exists) public
 
-sigma-syntax = sigma
+sigma-syntax = Sigma
 infix 2 sigma-syntax
 syntax sigma-syntax A (\ x -> B) = exists x of A st B
 
