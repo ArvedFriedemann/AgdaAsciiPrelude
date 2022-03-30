@@ -75,4 +75,6 @@ not-involutive {x = true} = refl
 
 open import Data.Nat renaming (ℕ to Nat) public
 open import Data.Nat.Instances public
---
+
+
+open import Data.Maybe using (Maybe; just; nothing) public 
