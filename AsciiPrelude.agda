@@ -14,6 +14,7 @@ open import Function using (_$_; id; const; flip) renaming (_∘_ to _o_) public
 
 open import Data.Product using (_,_) renaming (_×_ to _and_; proj₁ to fst; proj₂ to snd) public
 
+infixr 2 _-x-_
 _-x-_ : forall {a b} -> Set a -> Set b -> Set (a ~U~ b)
 _-x-_ = _and_
 
