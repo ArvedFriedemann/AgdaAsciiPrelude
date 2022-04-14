@@ -1,6 +1,6 @@
 module AgdaAsciiPrelude.AsciiPrelude where
 
-open import Agda.Primitive using (Level; lzero; lsuc) renaming (_⊔_ to _~U~_; Setω to Setw) public
+open import Level using (Level; Lift; lift; lower) renaming (_⊔_ to _~U~_; Setω to Setw; zero to lzero; suc to lsuc) public
 
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===_; _≢_ to _=/=) public
@@ -44,7 +44,7 @@ exists-syntax = exists
 syntax exists-syntax (\ x -> B) = exists x st B
 
 
-open import Data.List renaming (_∷_ to _::_; or to disjunct; and to conjunct) public
+open import Data.List renaming (_∷_ to _::_; or to disjunct; and to conjunct) hiding (lookup) public
 open import Data.Bool using (Bool; true; false; not; _xor_; if_then_else_) renaming (_∧_ to _&&_; _∨_ to _||_; T to Tt) public
 
 double-not : {x y : Bool} -> x === (not $ not y) -> x === y
@@ -77,4 +77,4 @@ open import Data.Nat renaming (ℕ to Nat) public
 open import Data.Nat.Instances public
 
 
-open import Data.Maybe using (Maybe; just; nothing) public 
+open import Data.Maybe using (Maybe; just; nothing) public
