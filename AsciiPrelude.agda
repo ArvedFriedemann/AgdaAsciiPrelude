@@ -78,3 +78,5 @@ open import Data.Nat.Instances public
 
 
 open import Data.Maybe using (Maybe; just; nothing; maybe) renaming (maybe′ to maybe') public
+
+open import Data.String using (String) renaming (_++_ to _++s_) public
