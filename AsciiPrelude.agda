@@ -80,4 +80,10 @@ open import Data.Nat.Instances public
 open import Data.Maybe using (Maybe; just; nothing; maybe) renaming (maybe′ to maybe') public
 
 open import Data.String using (String) renaming (_++_ to _++s_; concat to concats) public
-open import Data.Nat.Show using () renaming (show to showN) public 
+open import Data.Nat.Show using () renaming (show to showN) public
+
+open import Category.Monad using () renaming (RawMonad to Monad) public
+open Monad {{...}} renaming (_⊛_ to _<*>_) hiding (zip; zipWith) public
+
+import Data.List.Categorical as LCat
+open LCat.TraversableM {{...}} public
