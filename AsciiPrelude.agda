@@ -82,6 +82,7 @@ open import Data.Maybe using (Maybe; just; nothing; maybe) renaming (maybe′ to
 open import Data.String using (String) renaming (_++_ to _++s_; concat to concats) public
 open import Data.Nat.Show using () renaming (show to showN) public
 
+open import Category.Functor using () renaming (RawFunctor to Functor) public
 open import Category.Monad using () renaming (RawMonad to Monad) public
 open Monad {{...}} renaming (_⊛_ to _<*>_) hiding (zip; zipWith) public
 
