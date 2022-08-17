@@ -3,7 +3,7 @@ module AgdaAsciiPrelude.AsciiPrelude where
 open import Level using (Level; Lift; lift; lower) renaming (_⊔_ to _~U~_; Setω to Setw; zero to lzero; suc to lsuc) public
 
 import Relation.Binary.PropositionalEquality as Eq
-open Eq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===_; _≢_ to _=/=) public
+open Eq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===_; _≢_ to _=/=_) public
 open Eq.≡-Reasoning using (begin_) renaming (_≡⟨⟩_ to _=<>_; step-≡ to step-=; _∎ to _qed) public
 
 infixr 2 _=<_>_
