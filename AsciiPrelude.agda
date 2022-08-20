@@ -79,12 +79,6 @@ record Eq (A : Set) : Set where
   field
     _==_ : A -> A -> Bool
 open Eq {{...}} public
-{-}
-module DecToEqInstance where
-  instance
-    decToEq : {A : Set} -> {{d : DecEq A}} -> Eq A
-    decToEq = record { _==_ = \x y -> Dec.does (x ==d y) }
--}
 
 open import Data.Nat renaming (ℕ to Nat) public
 open import Data.Nat.Instances public
