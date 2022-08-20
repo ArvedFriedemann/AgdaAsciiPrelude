@@ -2,9 +2,9 @@ module AgdaAsciiPrelude.AsciiPrelude where
 
 open import Level using (Level; Lift; lift; lower) renaming (_⊔_ to _~U~_; Setω to Setw; zero to lzero; suc to lsuc) public
 
-import Relation.Binary.PropositionalEquality as Eq
-open Eq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===_; _≢_ to _=/=_) public
-open Eq.≡-Reasoning using (begin_) renaming (_≡⟨⟩_ to _=<>_; step-≡ to step-=; _∎ to _qed) public
+import Relation.Binary.PropositionalEquality as PEq
+open PEq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===_; _≢_ to _=/=_) public
+open PEq.≡-Reasoning using (begin_) renaming (_≡⟨⟩_ to _=<>_; step-≡ to step-=; _∎ to _qed) public
 
 infixr 2 _=<_>_
 _=<_>_ : forall {l} {A : Set l} (x {y z} : A) -> x === y -> y === z -> x === z
@@ -28,11 +28,6 @@ ifDec_then_else_ : forall {l l'} -> {A : Set l} -> {B : Set l'} -> Dec A -> B ->
 ifDec (yes _) then a else _ = a
 ifDec (no _) then _ else a = a
 
-open import Relation.Binary using (IsDecEquivalence)
-open IsDecEquivalence {{...}} using () renaming (_≟_ to _==d_) public
-
-DecEq : forall {l} (A : Set l) -> Set _
-DecEq A = IsDecEquivalence {A = A} _===_
 
 open import Data.Product using () renaming (Σ to Sigma; ∃ to exists) public
 
@@ -72,6 +67,22 @@ or-false {false} {false} x&&y=f = refl , refl
 not-involutive : forall {x} -> x === not (not x)
 not-involutive {x = false} = refl
 not-involutive {x = true} = refl
+
+
+open import Relation.Binary using (IsDecEquivalence)
+open IsDecEquivalence {{...}} using () renaming (_≟_ to _==d_) public
+
+DecEq : forall {l} (A : Set l) -> Set _
+DecEq A = IsDecEquivalence {A = A} _===_
+
+record Eq (A : Set) : Set where
+  field
+    _==_ : A -> A -> Bool
+open Eq {{...}} public
+instance
+  decToEq : {A : Set} -> {{d : DecEq A}} -> Eq A
+  decToEq = {!!}
+
 
 open import Data.Nat renaming (ℕ to Nat) public
 open import Data.Nat.Instances public
