@@ -29,7 +29,7 @@ ifDec (yes _) then a else _ = a
 ifDec (no _) then _ else a = a
 
 open import Relation.Binary using (IsDecEquivalence)
-open IsDecEquivalence {{...}} using () renaming (_≟_ to _==_) public
+open IsDecEquivalence {{...}} using () renaming (_≟_ to _==d_) public
 
 DecEq : forall {l} (A : Set l) -> Set _
 DecEq A = IsDecEquivalence {A = A} _===_
