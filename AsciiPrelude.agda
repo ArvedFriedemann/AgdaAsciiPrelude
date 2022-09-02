@@ -95,3 +95,29 @@ open Monad {{...}} renaming (_⊛_ to _<*>_) hiding (zip; zipWith) public
 
 import Data.List.Categorical as LCat
 open LCat.TraversableM {{...}} public
+
+open import Relation.Binary.Bundles public
+open import Relation.Binary public
+
+record ISTO {c l1 l2} (A : Set c) : Set (lsuc (c ~U~ l1 ~U~ l2)) where
+  field
+    eq : A -> A -> Set l1
+    gr : A -> A -> Set l2
+    overlap {{isto}} : IsStrictTotalOrder eq gr
+
+STO : forall {c} {l1} {l2} ->
+  (A : Set c) ->
+  {{rsto : ISTO {c} {l1} {l2} A}} ->
+  StrictTotalOrder c l1 l2
+STO {c} {l1} {l2} A {{rsto}} = record {
+  Carrier = A ;
+  _≈_ = _ ;
+  _<_ = _ ;
+  isStrictTotalOrder = ISTO.isto rsto }
+
+module Map {c l1 l2}
+  (Key : Set c)
+  {{sto : ISTO {c} {l1} {l2} Key}} where
+  open import Data.Tree.AVL.Map (STO Key) renaming
+    (foldr to foldrMap; initLast to initLastMap; map to mapMap) public
+open Map public
