@@ -39,7 +39,7 @@ exists-syntax = exists
 syntax exists-syntax (\ x -> B) = exists x st B
 
 
-open import Data.List renaming (_∷_ to _::_; or to disjunct; and to conjunct) hiding (lookup) public
+open import Data.List renaming (_∷_ to _::_; or to disjunct; and to conjunct; fromMaybe to maybeToList) hiding (lookup) public
 open import Data.Bool using (Bool; true; false; not; _xor_; if_then_else_) renaming (_∧_ to _&&_; _∨_ to _||_; T to Tt) public
 
 double-not : {x y : Bool} -> x === (not $ not y) -> x === y
@@ -84,7 +84,7 @@ open import Data.Nat renaming (ℕ to Nat) public
 open import Data.Nat.Instances public
 
 
-open import Data.Maybe using (Maybe; just; nothing; maybe) renaming (maybe′ to maybe') public
+open import Data.Maybe using (Maybe; just; nothing; maybe; fromMaybe; is-just; is-nothing) renaming (maybe′ to maybe') public
 
 open import Data.String using (String) renaming (_++_ to _++s_; concat to concats) public
 open import Data.Nat.Show using () renaming (show to showN) public
@@ -92,6 +92,9 @@ open import Data.Nat.Show using () renaming (show to showN) public
 open import Category.Functor using () renaming (RawFunctor to Functor) public
 open import Category.Monad using () renaming (RawMonad to Monad) public
 open Monad {{...}} renaming (_⊛_ to _<*>_) hiding (zip; zipWith) public
+
+module _ {r} (R : Set r) {a : Level} where
+  open import Category.Monad.Reader R a renaming (RawMonadReader to MonadReader) public
 
 import Data.List.Categorical as LCat
 open LCat.TraversableM {{...}} public
