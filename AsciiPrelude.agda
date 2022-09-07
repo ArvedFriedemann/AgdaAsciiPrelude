@@ -75,10 +75,17 @@ open IsDecEquivalence {{...}} using () renaming (_≟_ to _==d_) public
 DecEq : forall {l} (A : Set l) -> Set _
 DecEq A = IsDecEquivalence {A = A} _===_
 
-record Eq (A : Set) : Set where
+record Eq {l} (A : Set l) : Set l where
   field
     _==_ : A -> A -> Bool
 open Eq {{...}} public
+
+_elem_ : forall {l} {A : Set l} -> {{eq : Eq A}} -> A -> List A -> Bool
+x elem [] = false
+x elem (y :: ys) = (x == y) || (x elem ys)
+
+_elem_withEq_ : forall {l} {A : Set l} -> A -> List A -> Eq A -> Bool
+x elem xs withEq eq = _elem_ {{eq = eq}} x xs
 
 open import Data.Nat renaming (ℕ to Nat) public
 open import Data.Nat.Instances public
@@ -95,6 +102,8 @@ open Monad {{...}} renaming (_⊛_ to _<*>_) hiding (zip; zipWith) public
 
 module _ {r} (R : Set r) {a : Level} where
   open import Category.Monad.Reader R a renaming (RawMonadReader to MonadReader) public
+
+open import Category.Monad.State renaming (RawMonadState to MonadState) public
 
 import Data.List.Categorical as LCat
 open LCat.TraversableM {{...}} public
@@ -124,3 +133,6 @@ module Map {c l1 l2}
   open import Data.Tree.AVL.Map (STO Key) renaming
     (foldr to foldrMap; initLast to initLastMap; map to mapMap) public
 open Map public
+
+it : forall {l} {A : Set l} {{a : A}} -> A
+it {{a}} = a
