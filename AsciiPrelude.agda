@@ -117,6 +117,17 @@ record ISTO {c l1 l2} (A : Set c) : Set (lsuc (c ~U~ l1 ~U~ l2)) where
     gr : A -> A -> Set l2
     overlap {{isto}} : IsStrictTotalOrder eq gr
 
+STO-to-ISTO : forall {c l1 l2} ->
+  (sto : StrictTotalOrder c l1 l2) -> let open StrictTotalOrder sto in
+  ISTO {c} {l1} {l2} Carrier
+STO-to-ISTO sto = record {
+    eq = _ ;
+    gr = _ ;
+    isto = isStrictTotalOrder
+  }
+  where
+    open StrictTotalOrder sto
+
 STO : forall {c} {l1} {l2} ->
   (A : Set c) ->
   {{rsto : ISTO {c} {l1} {l2} A}} ->
@@ -132,7 +143,9 @@ module Map {c l1 l2}
   {{sto : ISTO {c} {l1} {l2} Key}} where
   open import Data.Tree.AVL.Map (STO Key) renaming
     (foldr to foldrMap; initLast to initLastMap; map to mapMap) public
-open Map public
+open Map using (Map) public
+module _ {c l1 l2} {Key : Set c} {{sto : ISTO {c} {l1} {l2} Key}} where
+  open Map Key {{sto}} hiding (Map) public
 
 it : forall {l} {A : Set l} {{a : A}} -> A
 it {{a}} = a
