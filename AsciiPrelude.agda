@@ -91,7 +91,7 @@ open import Data.Nat renaming (ℕ to Nat) public
 open import Data.Nat.Instances public
 
 
-open import Data.Maybe using (Maybe; just; nothing; maybe; fromMaybe; is-just; is-nothing) renaming (maybe′ to maybe') public
+open import Data.Maybe using (Maybe; just; nothing; maybe; fromMaybe; is-just; is-nothing) renaming (maybe′ to maybe'; when to whenMaybe) public
 
 open import Data.String using (String) renaming (_++_ to _++s_; concat to concats) public
 open import Data.Nat.Show using () renaming (show to showN) public
