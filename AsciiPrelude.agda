@@ -87,11 +87,19 @@ x elem (y :: ys) = (x == y) || (x elem ys)
 _elem_withEq_ : forall {l} {A : Set l} -> A -> List A -> Eq A -> Bool
 x elem xs withEq eq = _elem_ {{eq = eq}} x xs
 
-open import Data.Nat renaming (ℕ to Nat) public
+open import Data.Nat renaming (ℕ to Nat; _⊔_  to max) public
 open import Data.Nat.Instances public
 
 
 open import Data.Maybe using (Maybe; just; nothing; maybe; fromMaybe; is-just; is-nothing) renaming (maybe′ to maybe'; when to whenMaybe) public
+
+maybeLeft : forall {l} {A B : Set l} -> A or B -> Maybe A
+maybeLeft (left x) = just x
+maybeLeft (right _) = nothing
+
+maybeRight : forall {l} {A B : Set l} -> A or B -> Maybe B
+maybeRight (left _) = nothing
+maybeRight (right x) = just x
 
 open import Data.String using (String) renaming (_++_ to _++s_; concat to concats) public
 open import Data.Nat.Show using () renaming (show to showN) public
