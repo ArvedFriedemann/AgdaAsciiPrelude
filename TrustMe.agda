@@ -10,3 +10,5 @@ private
 trustVal : (a : A) -> B
 trustVal {A} {B} a with primTrustMe {x = A} {y = B}
 ... | refl = a
+
+postulate dummy : {A : Set} -> A
