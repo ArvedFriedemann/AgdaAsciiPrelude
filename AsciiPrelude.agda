@@ -157,3 +157,14 @@ module _ {c l1 l2} {Key : Set c} {{sto : ISTO {c} {l1} {l2} Key}} where
 
 it : forall {l} {A : Set l} {{a : A}} -> A
 it {{a}} = a
+
+
+record Show {l} (A : Set l) : Set l where
+  field
+    show : A -> String
+    
+open Show {{...}} public
+
+instance
+  showNat : Show Nat
+  showNat = record { show = showN }
