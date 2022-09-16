@@ -101,7 +101,13 @@ maybeRight : forall {l} {A B : Set l} -> A or B -> Maybe B
 maybeRight (left _) = nothing
 maybeRight (right x) = just x
 
-open import Data.String using (String) renaming (_++_ to _++s_; concat to concats) public
+open import Data.String using (String) renaming (_++_ to _++s_; concat to concats; length to lengthString) public
+
+is-emptyString : String -> Bool
+is-emptyString s with lengthString s
+... | 0 = true
+... | _ = false
+
 open import Data.Nat.Show using () renaming (show to showN) public
 
 open import Category.Functor using () renaming (RawFunctor to Functor) public
@@ -162,7 +168,7 @@ it {{a}} = a
 record Show {l} (A : Set l) : Set l where
   field
     show : A -> String
-    
+
 open Show {{...}} public
 
 instance
