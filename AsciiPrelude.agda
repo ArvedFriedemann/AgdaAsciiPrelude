@@ -18,6 +18,23 @@ infixr 2 _-x-_
 _-x-_ : forall {a b} -> Set a -> Set b -> Set (a ~U~ b)
 _-x-_ = _and_
 
+curry : forall {a b c} -> 
+  {A : Set a} -> 
+  {B : Set b} ->
+  {C : Set c} ->
+  ((A -x- B) -> C) ->
+  A -> B -> C
+curry f a b = f (a , b)
+
+uncurry : forall {a b c} -> 
+  {A : Set a} -> 
+  {B : Set b} ->
+  {C : Set c} ->
+  (A -> B -> C) ->
+  (A -x- B) -> C
+uncurry f (a , b) = f a b
+
+
 open import Data.Unit.Polymorphic using (tt) renaming (⊤ to T) public
 open import Data.Sum using () renaming ([_,_] to case-or; map to map-or; _⊎_ to _or_; inj₁ to left; inj₂ to right; fromInj₁ to fromLeft; fromInj₂ to fromRight; map₁ to mapLeft; map₂ to mapRight) public
 open import Data.Empty using () renaming (⊥ to BOT; ⊥-elim to absurd) public
