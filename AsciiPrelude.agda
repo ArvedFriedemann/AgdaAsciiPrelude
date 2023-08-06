@@ -10,6 +10,9 @@ infixr 2 _=<_>_
 _=<_>_ : forall {l} {A : Set l} (x {y z} : A) -> x === y -> y === z -> x === z
 x =< x=y > y=z = step-= x y=z x=y
 
+_=e=_ : forall {l l'} -> {A : Set l} -> {B : Set l'} -> (f g : A -> B) -> Set (l ~U~ l')
+f =e= g = forall {x} -> f x === g x
+
 open import Function using (_$_; id; const; flip) renaming (_∘_ to _o_) public
 
 open import Data.Product using (_,_) renaming (_×_ to _and_; proj₁ to fst; proj₂ to snd; map₁ to map1; map₂ to map2) public
