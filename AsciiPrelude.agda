@@ -10,6 +10,7 @@ infixr 2 _=<_>_
 _=<_>_ : forall {l} {A : Set l} (x {y z} : A) -> x === y -> y === z -> x === z
 x =< x=y > y=z = step-= x y=z x=y
 
+infix 1 _=e=_
 _=e=_ : forall {l l'} -> {A : Set l} -> {B : Set l'} -> (f g : A -> B) -> Set (l ~U~ l')
 f =e= g = forall {x} -> f x === g x
 
