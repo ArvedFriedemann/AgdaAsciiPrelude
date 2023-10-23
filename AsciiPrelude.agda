@@ -111,7 +111,6 @@ x elem xs withEq eq = _elem_ {{eq = eq}} x xs
 open import Data.Nat renaming (ℕ to Nat; _⊔_  to max) public
 open import Data.Nat.Instances public
 
-
 open import Data.Maybe using (Maybe; just; nothing; maybe; fromMaybe; is-just; is-nothing) renaming (maybe′ to maybe'; when to whenMaybe) public
 
 maybeLeft : forall {l} {A B : Set l} -> A or B -> Maybe A
@@ -121,6 +120,11 @@ maybeLeft (right _) = nothing
 maybeRight : forall {l} {A B : Set l} -> A or B -> Maybe B
 maybeRight (left _) = nothing
 maybeRight (right x) = just x
+
+lookupList : forall {l} {A : Set l} -> List A -> Nat -> Maybe A
+lookupList [] _ = nothing
+lookupList (x :: _) 0 = just x
+lookupList (_ :: xs) (suc n) = lookupList xs n
 
 open import Data.String using (String) renaming (_++_ to _++s_; concat to concats; length to lengthString) public
 
