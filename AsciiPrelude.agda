@@ -126,7 +126,7 @@ lookupList [] _ = nothing
 lookupList (x :: _) 0 = just x
 lookupList (_ :: xs) (suc n) = lookupList xs n
 
-open import Data.String using (String) renaming (_++_ to _++s_; concat to concats; length to lengthString) public
+open import Data.String using (String) renaming (_++_ to _++s_; concat to concats; length to lengthString; _==_ to _==s_) public
 
 is-emptyString : String -> Bool
 is-emptyString s with lengthString s
