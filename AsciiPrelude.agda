@@ -108,8 +108,13 @@ x elem (y :: ys) = (x == y) || (x elem ys)
 _elem_withEq_ : forall {l} {A : Set l} -> A -> List A -> Eq A -> Bool
 x elem xs withEq eq = _elem_ {{eq = eq}} x xs
 
-open import Data.Nat renaming (ℕ to Nat; _⊔_  to max) public
+open import Data.Nat renaming (ℕ to Nat; _⊔_  to max; _∸_ to _-:-_) public
 open import Data.Nat.Instances public
+
+_==n_ : Nat -> Nat -> Bool
+zero ==n zero = true
+(suc n) ==n (suc m) = n ==n m
+_ ==n _ = false
 
 open import Data.Maybe using (Maybe; just; nothing; maybe; fromMaybe; is-just; is-nothing) renaming (maybe′ to maybe'; when to whenMaybe) public
 
