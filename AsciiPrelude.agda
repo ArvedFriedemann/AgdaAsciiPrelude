@@ -4,11 +4,17 @@ open import Level using (Level; Lift; lift; lower) renaming (_⊔_ to _~U~_; Set
 
 import Relation.Binary.PropositionalEquality as PEq
 open PEq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===_; _≢_ to _=/=_) public
-open PEq.≡-Reasoning using (begin_) renaming (_≡⟨⟩_ to _=<>_; step-≡ to step-=; _∎ to _qed) public
+open PEq.≡-Reasoning using (begin_) renaming (_∎ to _qed) public
+open PEq.≡-Reasoning
 
-infixr 2 _=<_>_
-_=<_>_ : forall {l} {A : Set l} (x {y z} : A) -> x === y -> y === z -> x === z
-x =< x=y > y=z = step-= x y=z x=y
+syntax step-≡-⟩ x yRz x≡y = x =< x≡y > yRz
+syntax step-≡-∣ x xRy     = x =<> xRy
+syntax step-≡-⟨ x yRz y≡x = x =< y≡x < yRz
+
+-- open RBRS.begin-syntax 
+-- open RBRS using (begin_) renaming (_∎ to _qed) public
+-- open RBRS using () renaming (_≡⟨⟩_ to _=<>_; _≡⟨_⟩_ to _=<_>_) public
+
 
 infix 1 _=e=_
 _=e=_ : forall {l l'} -> {A : Set l} -> {B : Set l'} -> (f g : A -> B) -> Set (l ~U~ l')
@@ -140,14 +146,13 @@ is-emptyString s with lengthString s
 
 open import Data.Nat.Show using () renaming (show to showN) public
 
-open import Category.Functor using () renaming (RawFunctor to Functor) public
-open import Category.Monad using () renaming (RawMonad to Monad) public
-open Monad {{...}} renaming (_⊛_ to _<*>_) hiding (zip; zipWith) public
+open import Effect.Functor using () renaming (RawFunctor to Functor) public
+open import Effect.Monad using () renaming (RawMonad to Monad) public
+open Monad {{...}} hiding (zip; zipWith) public
 
-module _ {r} (R : Set r) {a : Level} where
-  open import Category.Monad.Reader R a renaming (RawMonadReader to MonadReader) public
+open import Effect.Monad.Reader using () renaming (RawMonadReader to MonadReader) public
 
-open import Category.Monad.State renaming (RawMonadState to MonadState) public
+open import Effect.Monad.State renaming (RawMonadState to MonadState) public
 
 import Data.List.Categorical as LCat
 open LCat.TraversableM {{...}} public
@@ -204,3 +209,4 @@ open Show {{...}} public
 instance
   showNat : Show Nat
   showNat = record { show = showN }
+ 
