@@ -154,8 +154,8 @@ open import Effect.Monad.Reader using () renaming (RawMonadReader to MonadReader
 
 open import Effect.Monad.State renaming (RawMonadState to MonadState) public
 
-import Data.List.Categorical as LCat
-open LCat.TraversableM {{...}} public
+import Data.List.Effectful as LEff
+open LEff.TraversableM {{...}} public
 
 open import Relation.Binary.Bundles public
 open import Relation.Binary public
