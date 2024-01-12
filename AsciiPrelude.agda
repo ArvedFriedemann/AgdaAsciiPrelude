@@ -7,9 +7,14 @@ open PEq using (refl; trans; sym; cong; cong-app; subst) renaming (_≡_ to _===
 open PEq.≡-Reasoning using (begin_) renaming (_∎ to _qed) public
 open PEq.≡-Reasoning
 
-syntax step-≡-⟩ x yRz x≡y = x =< x≡y > yRz
-syntax step-≡-∣ x xRy     = x =<> xRy
-syntax step-≡-⟨ x yRz y≡x = x =< y≡x < yRz
+private
+  step> = step-≡-⟩
+  step| = step-≡-∣
+  step< = step-≡-⟨
+
+syntax step> x yRz x≡y = x =< x≡y > yRz
+syntax step| x xRy     = x =<> xRy
+syntax step< x yRz y≡x = x =< y≡x < yRz
 
 -- open RBRS.begin-syntax 
 -- open RBRS using (begin_) renaming (_∎ to _qed) public
