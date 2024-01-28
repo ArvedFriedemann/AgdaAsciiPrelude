@@ -119,7 +119,7 @@ x elem (y :: ys) = (x == y) || (x elem ys)
 _elem_withEq_ : forall {l} {A : Set l} -> A -> List A -> Eq A -> Bool
 x elem xs withEq eq = _elem_ {{eq = eq}} x xs
 
-open import Data.Nat renaming (ℕ to Nat; _⊔_  to max; _∸_ to _-:-_) public
+open import Data.Nat renaming (ℕ to Nat; _⊔_  to max; _∸_ to _-:-_; _≤ᵇ_ to _leq_) public
 open import Data.Nat.Instances public
 
 _==n_ : Nat -> Nat -> Bool
