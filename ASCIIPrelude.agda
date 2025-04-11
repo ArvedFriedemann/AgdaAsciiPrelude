@@ -11,7 +11,8 @@ open import Level renaming (zero to lzero; suc to lsuc; _⊔_ to _~U~_; lift to 
 private
     variable
         h i j k l l' l'' l''' l1 l2 l3 : Level
-        A B C : Set l
+        ST : Set l
+        A B C D E P Q : ST
 
 it : forall {l} {A : Set l} -> {{ a : A }} -> A
 it {{ a }} = a
@@ -518,6 +519,13 @@ open import Data.Sum using () renaming (
 open import Data.Sum using () renaming (
           _⊎_ to _-+-_
     ) public
+
+fromSumSigma : ((a : A) -> C (left a) -> D) -> ((b : B) -> C (right b) -> D) -> Sigma (A -+- B) C -> D
+fromSumSigma fa fb (left x , c) = fa x c
+fromSumSigma fa fb (right y , c) = fb y c
+
+fromSumSigma' : ((a : A) -> P a -> D) -> ((b : B) -> Q b -> D) -> Sigma (A -+- B) (fromSum P Q) -> D
+fromSumSigma' {P = P} {Q = Q} = fromSumSigma {C = fromSum P Q}
 
 open import Data.Maybe using (
       Maybe
